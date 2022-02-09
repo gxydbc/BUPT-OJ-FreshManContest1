@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int num1,num2,minCM =0;
+
+	while (cin >> num1 >> num2)
+	{
+		while (1)
+		{
+			minCM++;
+			if (minCM % num1 == 0 && minCM % num2 == 0)
+			{
+				break;
+			}
+		}
+		cout << minCM << endl;
+		minCM = 0;
+	}
+	
+
+	system("pause");
+	return 0;
+}
