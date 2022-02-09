@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct avgM
+{
+	int J, F;
+	double avg;
+};
+
+bool cmp(avgM x, avgM y)
+{
+	if (fabs(x.avg - y.avg) > 0.00001)
+		return x.avg > y.avg;
+}
+
+int main()
+{
+	int M, N;
+	while (cin >> M >> N)
+	{
+		if (M == -1 && N == -1)
+		{
+			break;
+		}
+		else if (M == 0 || N == 0)
+		{
+			cout << 0 << endl;
+		}
+		else
+		{
+			int j = 0;
+			double sum = 0;
+			avgM a[1000];
+			for (int i = 0; i < N; i++)
+			{
+				cin >> a[i].J >> a[i].F;
+				if (a[i].F > 0)
+				{
+					a[i].avg = double(a[i].J) / double(a[i].F);
+				}
+				else
+				{
+					a[i].avg = 0;
+				}
+			}
+
+			sort(a, a + N, cmp);
+
+			while (j < N && M > 0)
+			{
+				if (M >= a[j].F)
+				{
+					sum += a[j].J;
+					M -= a[j].F;
+				}
+				else
+				{
+					sum += M * a[j].avg;
+					M = 0;
+				}
+				j++;
+			}
+			cout << fixed << setprecision(3) << sum << endl;
+		}
+	}
+
+	system("pause");
+	return 0;
+}
