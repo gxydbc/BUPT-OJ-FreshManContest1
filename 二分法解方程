@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+double func(double x)
+{
+	return 8 * pow(x, 4.0) + 7 * pow(x, 3.0) + 2 * pow(x, 2.0) + 3 * x + 6;
+}
+
+int main()
+{
+	int T;
+	cin >> T;	//获取数据组数
+
+	for (int i = 0; i < T; i++)
+	{
+		//获取等式右边的Y
+		double Y;
+		cin >> Y;
+
+		if (func(0) <= Y && Y <= func(100))
+		{
+			//当Y属于该范围是才存在解
+			double left = 0, right = 100, mid, ans;
+			while (right - left > 1e-6)
+			{
+				//求中间值
+				mid = (right + left) / 2;
+				ans = func(mid);
+				if (ans > Y)
+				{
+					//中间值大，右边缩小
+					right = mid - 1e-7;
+				}
+				else
+				{
+					//中间值小，左边放大
+					left = mid + 1e-7;
+				}
+			}
+			cout << fixed << setprecision(4) << (right + left) / 2 << endl;
+		}
+		else
+		{
+			cout << "No solution!" << endl;
+		}
+	}
+
+	system("pause");
+	return 0;
+}
